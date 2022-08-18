@@ -38,15 +38,35 @@ def isValidPermutation(permutation):
 
     return True
 
+# Print anagrams in a grid for improve readability.
+def prettyPrint(permutations):
+    if len(permutations) == 0:
+        return ""
 
+    output = ""
+    wordsOnLine = 0
+    wordPerLine = 4
 
-    return validAnagrams    
+    for permutation in permutations:
+        # Print current char buffer then reset it.
+        if wordsOnLine % wordPerLine == 0:
+            print(output)
+            output = ""
+            wordsOnLine = 0
+
+        if wordsOnLine == 0:
+            output = permutation
+        else:
+            output += " | " + permutation
+        
+        wordsOnLine += 1
+
+    
+
 
 if __name__=="__main__":
     permutations = permutate("aefglorvy ")
     dictionary = buildHashTable()
     validAnagramsDict = getValidAnagrams(permutations)
 
-    for anagram in validAnagramsDict.keys():
-        print(anagram + "\n")
-
+    prettyPrint(validAnagramsDict.keys())
