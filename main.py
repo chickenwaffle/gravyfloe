@@ -24,8 +24,11 @@ def getValidAnagrams(permutations):
         for word in splitPermutation:
 
             # Check if current word is a valid word from our dictionary.
-            if (dictionary[word] != "1"):
-                break
+            try:
+                if (dictionary[word] == 0):
+                    break
+            except KeyError:
+                break 
 
             # Add to valid anagrams.
             validAnagrams[permutation] = 1
@@ -33,7 +36,7 @@ def getValidAnagrams(permutations):
     return validAnagrams    
 
 if __name__=="__main__":
-    permutations = permutate("assess ")
+    permutations = permutate("aefglorvy ")
     dictionary = buildHashTable()
     validAnagramsDict = getValidAnagrams(permutations)
 
