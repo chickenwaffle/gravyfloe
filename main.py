@@ -21,17 +21,24 @@ def getValidAnagrams(permutations):
     for permutation in permutations:
         # "a fly dove" -> "a", "fly", "dove"
         splitPermutation = permutation.split(" ")
-        for word in splitPermutation:
+        if isValidPermutation(splitPermutation):
+            validAnagram = " ".join(splitPermutation)
+            validAnagrams[validAnagram] = 1
+    
+    return validAnagrams
 
-            # Check if current word is a valid word from our dictionary.
-            try:
-                if (dictionary[word] == 0):
-                    break
-            except KeyError:
-                break 
+def isValidPermutation(permutation):
+    for word in permutation:
+        # Check if current word is a valid word from our dictionary.
+        try:
+            if (dictionary[word] == 0 and not ""):
+                return False
+        except KeyError:
+            return False
 
-            # Add to valid anagrams.
-            validAnagrams[permutation] = 1
+    return True
+
+
 
     return validAnagrams    
 
